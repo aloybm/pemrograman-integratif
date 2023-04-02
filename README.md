@@ -24,7 +24,7 @@ Yang perlu diinstalasi :
     ``` npm i @grpc/proto-loader"```
 3.  Buat 3 file
     - Proto file
-    ```touch filename.proto```
+    ```touch service_def.proto```
     - Server
     ```touch server.js```
     - Client
