@@ -16,7 +16,7 @@ Yang perlu diinstalasi :
 ## Tahapan
 ### 1. Init Project
 1.  Clone project
-    ```git clone https://github.com/aloybm/pemrograman-integratif```
+    ``` git clone https://github.com/aloybm/pemrograman-integratif ```
 2.  Init code enc
     ```npm i```
     ```npm i grpc ```
@@ -24,7 +24,7 @@ Yang perlu diinstalasi :
     ``` npm i @grpc/proto-loader"```
 3.  Buat 3 file
     - Proto file
-    ```touch filename.prot```
+    ```touch filename.proto```
     - Server
     ```touch server.js```
     - Client
