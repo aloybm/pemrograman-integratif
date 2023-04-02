@@ -38,22 +38,6 @@ function getUser(call, callback) {
   });
 }
 
-function getAllUsers(call, callback) {
-  pool.query('SELECT * FROM users', (error, results) => {
-    if (error) {
-      console.error(error);
-      callback({ code: grpc.status.INTERNAL, message: 'Internal Server Error' });
-      return;
-    }
-    const users = results.map(userData => ({
-      userId: userData.user_id,
-      name: userData.name,
-      age: userData.age,
-    }));
-    callback(null, { users });
-  });
-}
-
 function addUser(call, callback) {
   const name = call.request.name;
   const age = call.request.age;
@@ -100,15 +84,15 @@ function main() {
   const server = new grpc.Server();
   server.addService(userProto.UserService.service, {
     getUser,
-    getAllUsers,
     addUser,
     updateUser,
     deleteUser,
   });
-  server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
-    console.log('Server running at http://0.0.0.0:50051');
+  server.bindAsync('127.0.0.1:5000', grpc.ServerCredentials.createInsecure(), () => {
+    console.log('Server running at http://127.0.0.1:5000');
     server.start();
   });
 }
 
 main();
+

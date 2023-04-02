@@ -6,7 +6,7 @@ const PROTO_PATH = './service_def.proto';
 const packageDefinition = protoLoader.loadSync(PROTO_PATH);
 const userProto = grpc.loadPackageDefinition(packageDefinition).User;
 
-const client = new userProto.UserService('localhost:50051', grpc.credentials.createInsecure());
+const client = new userProto.UserService('localhost:5000', grpc.credentials.createInsecure());
 
 function getUser(userId) {
   return new Promise((resolve, reject) => {
@@ -20,15 +20,6 @@ function getUser(userId) {
   });
 }
 
-function getAllUsers() {
-  return new Promise((resolve, reject) => {
-    const users = [];
-    const call = client.getAllUsers({});
-    call.on('data', user => users.push(user));
-    call.on('error', error => reject(error));
-    call.on('end', () => resolve(users));
-  });
-}
 
 function addUser(name, age) {
   return new Promise((resolve, reject) => {
@@ -68,19 +59,15 @@ function deleteUser(userId) {
   });
 }
 
-// Example usage:
 async function test() {
   try {
-    const user = await getUser(1);
+    const user = await getUser(9);
     console.log('getUser:', user);
 
-    // const users = await getAllUsers();
-    // console.log('getAllUsers:', users);
-
-    const newUser = await addUser('John Doe', 30);
+    const newUser = await addUser('John Wick', 30);
     console.log('addUser:', newUser);
 
-    const updatedUser = await updateUser(1, 'Jane Doe', 35);
+    const updatedUser = await updateUser(1, 'John Cena', 35);
     console.log('updateUser:', updatedUser);
 
     const result = await deleteUser(2);
