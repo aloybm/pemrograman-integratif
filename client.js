@@ -61,16 +61,16 @@ function deleteUser(userId) {
 
 async function test() {
   try {
-    const user = await getUser(*);
+    const user = await getUser(9);
     console.log('getUser:', user);
 
-    const newUser = await addUser('Messi', 38);
+    const newUser = await addUser('John Wick', 30);
     console.log('addUser:', newUser);
 
-    const updatedUser = await updateUser(1, 'Ronaldo', 35);
+    const updatedUser = await updateUser(1, 'John Cena', 35);
     console.log('updateUser:', updatedUser);
 
-    const result = await deleteUser(9);
+    const result = await deleteUser(2);
     console.log('deleteUser:', result);
   } catch (error) {
     console.error(error);
