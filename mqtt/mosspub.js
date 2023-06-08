@@ -10,28 +10,27 @@ client.on('connect', function () {
         output: process.stdout
     });
 
-    readline.request('masuk/keluar: ', async function (topic) {
+    readline.question('masuk/keluar: ', async function (topic) {
         readline.close();
 
         const cardId = await response('idkartu: ');
-        const gateId = await response('idkartu: ');
-
+        const gateId = await response('idgate: ');
 
         const message = JSON.stringify({ idkartu: cardId, idgate: gateId });
         client.publish(topic, message, function(){
             console.log(`Message published to ${topic}: ${message}`);
-            client.end();   
+            client.end(); 
         });
     });
 });
 
-function response(request) {
+function response(question) {
     return new Promise(resolve => {
         const readline = require('readline').createInterface({
             input: process.stdin,
             output: process.stdout
         });
-        readline.request(response, answer => {
+        readline.question(question, answer => {
             readline.close();
             resolve(answer.trim());
         });
